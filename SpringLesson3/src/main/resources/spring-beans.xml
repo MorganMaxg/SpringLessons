@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-lazy-init="true" xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--配置文件中name属性可用','  ';'  ' ' 分割-->
+    <alias name="user1" alias="userAlias"></alias>
+    <bean name="user;user1" class="model.User" factory-method="createInstance">
+        <!--<property name="name" value="maxg"/>-->
+        <!--<property name="age" value="23"/>-->
+        <!--<property name="id" value="1"/>-->
+    </bean>
+    <bean name="messageModel messageModel2" class="model.MessageModel">
+        <property name="id" value="1"/>
+        <property name="info" value="hello 2016"/>
+        <property name="userId" value="1"/>
+    </bean>
+
+    <bean id="userMessage" class="model.UserMessage">
+        <constructor-arg name="user" ref="user"></constructor-arg>
+        <constructor-arg name="messageModel" ref="messageModel"></constructor-arg>
+    </bean>
+
+    <bean id="userMessage2" class="model.UserMessage">
+        <constructor-arg type="model.User" ref="user"></constructor-arg>
+        <constructor-arg type="model.MessageModel" ref="messageModel"></constructor-arg>
+    </bean>
+
+    <bean id="userMessage3" class="model.UserMessage">
+        <constructor-arg index="0" ref="user"></constructor-arg>
+        <constructor-arg index="1" ref="messageModel"></constructor-arg>
+    </bean>
+</beans>
